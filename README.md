@@ -120,6 +120,7 @@ expected response:
     NAMESPACE             NAME                      READY   SECRET                    AGE
     example-production   example-production-tls     True    example-production-tls    90s
 
+
 describe certificate:
 
     kubectl  describe  certificates/example-production-tls -n $NAMESPACE
