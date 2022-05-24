@@ -29,7 +29,7 @@ You must meet the following requirements:
 
 For create TLS secure certificates i go to use, [cert-manager](https://cert-manager.io/) is a powerful and extensible X.509 certificate controller for Kubernetes and OpenShift workloads. It will obtain certificates from a variety of Issuers, both popular public Issuers as well as private Issuers, and ensure the certificates are valid and up-to-date, and will attempt to renew certificates at a configured time before expiry.
 
-![logo-incloodo](https://cert-manager.io/images/cert-manager-graphic.svg ':size=100%')
+![logo-example](https://cert-manager.io/images/cert-manager-graphic.svg ':size=100%')
 
 #### Steps
 
@@ -73,9 +73,54 @@ Copy this in one file and apply the ClusterInssuer
         server: https://acme-v02.api.letsencrypt.org/directory
         privateKeySecretRef:
           # Secret resource that will be used to store the account's private key.
-          name: example-issuer-account-key 
+          name: letsencrypt-prod
         # Add a single challenge solver, HTTP01 using nginx
         solvers:
         - http01:
             ingress:
               class: nginx
+
+6. Edit your ingress configuration and add this:
+
+Add this lines
+
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: ingress-example-backend
+      namespace: example-production
+      annotations:
+        kubernetes.io/ingress.class: "nginx"           <<< ADD THIS LINE >>>
+        cert-manager.io/cluster-issuer: "letsencrypt-prod"  <<< ADD THIS LINE >>>
+    spec:
+      ingressClassName: nginx
+      rules:
+        - host: server.example.com
+          http:
+            paths:
+              - pathType: Prefix
+                backend:
+                  service:
+                    name: example-backend
+                    port:
+                      number: 8000
+                path: /
+      tls:                        <<< ADD THIS LINE >>>
+        - hosts:                   <<< ADD THIS LINE >>>
+          - server.example.com   <<< ADD THIS LINE >>>
+          secretName: example-production-tls <<< ADD THIS LINE >>>
+
+
+#### Verify certificate 
+
+    kubectl get certificates $NAMESPACE
+
+expected response:
+
+    NAMESPACE             NAME                      READY   SECRET                    AGE
+    example-production   example-production-tls     True    example-production-tls    90s
+
+describe certificate:
+
+    kubectl  describe  certificates/example-production-tls -n $NAMESPACE
+
