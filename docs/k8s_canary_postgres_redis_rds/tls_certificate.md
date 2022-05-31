@@ -1,6 +1,5 @@
 # Configuration of TLS certificate
 
-
 ## Configuration of TLS certificate <a name="tls-certificates"></a>
 
 
@@ -109,5 +108,5 @@ expected response:
 
 describe certificate:
 
-    kubectl  describe  certificates/incloodo-staging-tls -n incloodo-staging
+    kubectl  describe  certificates/example-staging-tls -n example-staging
 

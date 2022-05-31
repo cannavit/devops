@@ -9,7 +9,7 @@
 
 Login with AWS services
 
-    aws configure --profile incloodo
+    aws configure --profile example
 
 Check available clsuters:
 

@@ -35,7 +35,7 @@ Install chart
 
 Copy the output inside of the file
 
-    k8s/staging/incloodo-backend/02-incloodo-backend-secrets.yaml
+    k8s/staging/example-backend/02-example-backend-secrets.yaml
 
 
 
@@ -193,20 +193,20 @@ kubectl debug example-staging -it --image=ghcr.io/example/backend --share-proces
 
     apk add postgresql-client  
     pqsl -h postgresql -U postgres 
-    psql -h postgresql  -U postgres incloodo_stagin   
-    psql -h postgresql-2  -U postgres incloodo_production
-    psql -h postgresql-rds  -U postgres incloodo_production
+    psql -h postgresql  -U postgres example_stagin   
+    psql -h postgresql-2  -U postgres example_production
+    psql -h postgresql-rds  -U postgres example_production
 
 
 
 
-    kubectl -n incloodo-production set image deployment/incloodo-backend incloodo-backend=ghcr.io/incloodo/backend:production_latest
+    kubectl -n example-production set image deployment/example-backend example-backend=ghcr.io/example/backend:production_latest
 
-    kubectl -n incloodo-production set image deployment/incloodo-backend incloodo-backend=ghcr.io/incloodo/backend:production_1.40
-    kubectl -n incloodo-production set image deployment/incloodo-backend incloodo-backend=ghcr.io/incloodo/backend:production_1.44
+    kubectl -n example-production set image deployment/example-backend example-backend=ghcr.io/example/backend:production_1.40
+    kubectl -n example-production set image deployment/example-backend example-backend=ghcr.io/example/backend:production_1.44
 
 
 
-    kubectl describe canary/incloodo-backend -n incloodo-production 
+    kubectl describe canary/example-backend -n example-production 
 
     kubectl get canaries --all-namespaces
