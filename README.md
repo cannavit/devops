@@ -1,8 +1,12 @@
-# Welcome to K8s Configuration
+# Continuos Integration Architecture (K8s)
+
+This document contains all the necessary steps to develop a continuous integration (CI) architecture based on Kubernetes, Terraform, Nginx, RDS, and a load balancing strategy using CANARY. This type of architecture is recommended for high availability services with continuous deployment of new versions.
 
 
-Here is all the documentation to implement the DevOps culture as a PRO. 
+![k8s](docs/k8s_canary_postgres_redis_rds/k8s.png ':size=100%')
 
+
+Kubernetes is a fantastic tool for this type of case.
 
 > Maintainer
 
