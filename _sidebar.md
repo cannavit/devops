@@ -15,3 +15,7 @@
 - Kubernetes
   - [Create namespace](docs/k8s_canary_postgres_redis_rds/namespaces.md)
   - [Deploy Redis](docs/k8s_canary_postgres_redis_rds/redis.md)
+  - [TLS Certificate](docs/k8s_canary_postgres_redis_rds/tls_certificate.md)
+  - [RDS Connection](docs/k8s_canary_postgres_redis_rds/rds_posgresql.md)
+
+
